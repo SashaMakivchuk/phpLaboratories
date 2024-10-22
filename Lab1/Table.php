@@ -47,7 +47,6 @@ return null;
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     foreach ($projects as &$project) {
         if ($project['code'] === $_POST['code']) {
-// Update project details
             $project['author'] = $_POST['author'];
             $project['budget'] = intval($_POST['budget']);
             $project['ratings'] = [
