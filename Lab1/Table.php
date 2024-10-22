@@ -20,28 +20,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add'])) {
     exit;
 }
 
-function filterProjects($projects, $maxBudget, $minTotalRatings) {
-$filteredProjects = [];
-foreach ($projects as $project) {
-$totalRatings = array_sum($project['ratings']);
-if ($project['budget'] <= $maxBudget && $totalRatings >= $minTotalRatings) {
-$filteredProjects[] = $project;
-}
-}
-return $filteredProjects;
+function filterProjects($projects, $maxBudget, $minTotalRatings)
+{
+    $filteredProjects = [];
+    foreach ($projects as $project) {
+        $totalRatings = array_sum($project['ratings']);
+        if ($project['budget'] <= $maxBudget && $totalRatings >= $minTotalRatings) {
+            $filteredProjects[] = $project;
+        }
+    }
+    return $filteredProjects;
 }
 
 $maxBudget = isset($_GET['max_budget']) ? intval($_GET['max_budget']) : 20000;
 $minTotalRatings = isset($_GET['min_ratings']) ? intval($_GET['min_ratings']) : 10;
 $filteredProjects = filterProjects($projects, $maxBudget, $minTotalRatings);
 
-function findProjectByCode($projects, $code) {
-foreach ($projects as $project) {
-if ($project['code'] === $code) {
-return $project;
-}
-}
-return null;
+function findProjectByCode($projects, $code)
+{
+    foreach ($projects as $project) {
+        if ($project['code'] === $code) {
+            return $project;
+        }
+    }
+    return null;
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
@@ -64,7 +66,6 @@ exit;
 $editProject = isset($_GET['code']) ? findProjectByCode($projects, $_GET['code']) : null;
 
 ?>
-
 <h2>Projects</h2>
 <table border='1'>
     <thead>
